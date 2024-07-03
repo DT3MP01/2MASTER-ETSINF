@@ -1,0 +1,200 @@
+(define (problem DLOG-2-2-2)
+	(:domain driverlog)
+	(:objects
+	city1 - city
+	home1 - house
+	station1 - station
+	station2 - station
+	airport1 - airport
+
+	city2 - city
+	home2 - house
+	airport2 - airport
+	station3 - station
+
+	city3 - city
+	home3 - house
+	home4 - house
+	station4 - station
+
+
+
+	plane1 - plane
+	plane2 - plane
+	train1 - train
+	train2 - train
+	truck1 - truck
+	truck2 - truck
+	truck3 - truck
+	truck4 - truck
+
+	driver1 - driver
+	driver2 - driver
+	driver3 - driver
+	parcel1 - parcel
+	parcel2 - parcel
+
+
+	)
+	
+	(:init
+	;Definir la localización de los lugares y su ciudad
+	(located airport1 city1)
+	(located station2 city1)
+	(located station1 city1)
+	(located home1 city1)
+
+	(located airport2 city2)
+	(located home2 city2)
+	(located station3 city2)
+
+	(located station4 city3)
+	(located home3 city3)
+	(located home4 city3)
+	;Definir la localización de los conductores
+	(at driver1 station2)
+	(at driver2 home2)
+	(at driver3 home3)
+	;;Definir la localización de los paquetes y su peso
+	(at parcel1 home2)
+	(at parcel2 home1)
+	(= (parcel-weight parcel1) 15)
+	(= (parcel-weight parcel2) 20)
+
+	;Definir de los vehículos y sus pesos
+	(at truck1 station1)
+	(at truck2 airport1)
+	(at truck3 airport2)
+	(at truck4 home3)
+
+	(= (capacity-weight truck1) 30)
+	(= (capacity-weight truck2) 40)
+	(= (capacity-weight truck3) 20)
+	(= (capacity-weight truck4) 40)
+
+
+	(at train1 station2)
+	(at train2 station4)
+	(at plane2 airport2)
+	(at plane1 airport1)
+
+
+	;City1
+	(path home1 station1)
+	(path home1 station2)
+	(path home1 airport1)
+	(= (time-to-walk home1 station1) 1)
+	(= (time-to-walk home1 station2) 1)
+	(= (time-to-walk home1 airport1) 1)
+	(= (time-to-drive home1 station1) 1)
+	(= (time-to-drive home1 station2) 1)
+	(= (time-to-drive home1 airport1) 1)
+	(path station1 home1)
+	(path station1 station2)
+	(path station1 airport1)
+	(= (time-to-walk station1 home1) 1)
+	(= (time-to-walk station1 station2) 1)
+	(= (time-to-walk station1 airport1) 1)
+	(= (time-to-drive station1 home1) 1)
+	(= (time-to-drive station1 station2) 1)
+	(= (time-to-drive station1 airport1) 1)
+
+	(path station2 home1)
+	(path station2 station1)
+	(path station2 airport1)
+	(= (time-to-walk station2 home1) 1)
+	(= (time-to-walk station2 station1) 1)
+	(= (time-to-walk station2 airport1) 1)
+	(= (time-to-drive station2 home1) 1)
+	(= (time-to-drive station2 station1) 1)
+	(= (time-to-drive station2 airport1) 1)
+	(path airport1 home1)
+	(path airport1 station1)
+	(path airport1 station2)
+	(= (time-to-walk airport1 home1) 1)
+	(= (time-to-walk airport1 station1) 1)
+	(= (time-to-walk airport1 station2) 1)
+	(= (time-to-drive airport1 home1) 1)
+	(= (time-to-drive airport1 station1) 1)
+	(= (time-to-drive airport1 station2) 1)
+
+	;City2
+	(path airport2 station3)
+	(path airport2 home2)
+	(= (time-to-walk airport2 station3) 1)
+	(= (time-to-walk airport2 home2) 1)
+	(= (time-to-drive airport2 station3) 1)
+	(= (time-to-drive airport2 home2) 1)
+	(path station3 airport2)
+	(path station3 home2)
+	(= (time-to-walk station3 airport2) 1)
+	(= (time-to-walk station3 home2) 1)
+	(= (time-to-drive station3 airport2) 1)
+	(= (time-to-drive station3 home2) 1)
+	(path home2 airport2)
+	(path home2 station3)
+	(= (time-to-walk home2 airport2) 1)
+	(= (time-to-walk home2 station3) 1)
+	(= (time-to-drive home2 airport2) 1)
+	(= (time-to-drive home2 station3) 1)
+
+	;City3
+	(path home3 station4)
+	(= (time-to-walk home3 station4) 1)
+	(= (time-to-drive home3 station4) 1)
+	(path home4 station4)
+	(= (time-to-walk home4 station4) 1)
+	(= (time-to-drive home4 station4) 1)
+	(path station4 home3)
+	(path station4 home4)
+	(= (time-to-walk station4 home3) 1)
+	(= (time-to-walk station4 home4) 1)
+	(= (time-to-drive station4 home3) 1)
+	(= (time-to-drive station4 home4) 1)
+	
+
+	;Conection between Airports
+	(path airport1 airport2)
+	(= (time-to-fly airport1 airport2) 1)
+	(path airport2 airport1)
+	(= (time-to-fly airport2 airport1) 1)
+
+	;Connection between Train stations
+	(path station1 station2)
+	(path station1 station3)
+	(path station1 station4)
+	(= (time-to-train station1 station2) 1)
+	(= (time-to-train station1 station3) 1)
+	(= (time-to-train station1 station4) 1)
+	(path station2 station1)
+	(path station2 station3)
+	(path station2 station4)
+	(= (time-to-train station2 station1) 1)
+	(= (time-to-train station2 station3) 1)
+	(= (time-to-train station2 station4) 1)
+	(path station3 station1)
+	(path station3 station2)
+	(path station3 station4)
+	(= (time-to-train station3 station1) 1)
+	(= (time-to-train station3 station2) 1)
+	(= (time-to-train station3 station4) 1)
+	(path station4 station1)
+	(path station4 station2)
+	(path station4 station3)
+	(= (time-to-train station4 station1) 1)
+	(= (time-to-train station4 station2) 1)
+	(= (time-to-train station4 station3) 1)
+
+
+
+)
+	(:goal (and
+	(at parcel1 home4)
+	(at parcel2 home4)
+
+
+	))
+
+(:metric minimize (total-time))
+
+)

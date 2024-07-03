@@ -1,0 +1,38 @@
+ Program
+   Variables Setup
+   Robot Program
+     y≔-50
+     rx≔0
+     ry≔0
+     rz≔0
+     P_ini≔get_actual_tcp_pose()
+     desplazamiento≔p[0,y/1000,0,rx,ry,rz]
+     pos_coger≔pose_add(P_ini, desplazamiento)
+     z≔-100
+     desplazamiento≔p[0,0,z/1000,0,0,0]
+     PrimerPunto≔pose_add(pos_coger, desplazamiento)
+     y≔-140
+     desplazamiento≔p[0,y/1000,0,0,0,0]
+     SegundoPunto≔pose_add(PrimerPunto, desplazamiento)
+     x≔-130
+     desplazamiento≔p[x/1000,0,0,0,0,0]
+     TercerPunto≔pose_add(PrimerPunto, desplazamiento)
+     y≔-30
+     desplazamiento≔p[0,y/1000,0,0,0,0]
+     CuartoPunto≔pose_add(SegundoPunto, desplazamiento)
+     x≔-50
+     desplazamiento≔p[x/1000,0,0,0,0,0]
+     QuintoPunto≔pose_add(TercerPunto, desplazamiento)
+     MoveJ
+       Wait: 1.0
+       pos_coger
+       PrimerPunto
+       Loop 2 times
+         MoveL
+           SegundoPunto
+           TercerPunto
+           PrimerPunto
+       Loop 2 times
+         CuartoPunto
+         QuintoPunto
+         PrimerPunto

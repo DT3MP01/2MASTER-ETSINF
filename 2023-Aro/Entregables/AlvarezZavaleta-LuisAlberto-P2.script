@@ -1,0 +1,102 @@
+def AlvarezZavaletaLuisAlbertoP2():
+  global _hidden_verificationVariable=0
+  set_safety_mode_transition_hardness(1)
+  set_tcp(p[0.0,0.0,0.0,0.0,0.0,0.0])
+  set_standard_analog_input_domain(0, 1)
+  set_standard_analog_input_domain(1, 1)
+  set_tool_analog_input_domain(0, 1)
+  set_tool_analog_input_domain(1, 1)
+  set_analog_outputdomain(0, 0)
+  set_analog_outputdomain(1, 0)
+  set_input_actions_to_default()
+  set_tool_communication(False, 115200, 0, 1, 1.5, 3.5)
+  set_tool_output_mode(0)
+  set_tool_digital_output_mode(0, 1)
+  set_tool_digital_output_mode(1, 1)
+  set_tool_voltage(0)
+  set_gravity([0.0, 0.0, 9.82])
+  set_target_payload(0.000000, [0.000000, 0.000000, 0.000000], [0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000])
+  step_count_a78d5804_8d23_4f99_84c2_44e5abcf116f = 0.0
+  thread Step_Counter_Thread_1e179ba6_a373_456b_9a26_99a8659085bb():
+    while (True):
+      step_count_a78d5804_8d23_4f99_84c2_44e5abcf116f = step_count_a78d5804_8d23_4f99_84c2_44e5abcf116f + 1.0
+      sync()
+    end
+  end
+  run Step_Counter_Thread_1e179ba6_a373_456b_9a26_99a8659085bb()
+  $ 2 "Robot Program"
+  $ 3 "y≔-50"
+  global y=-50
+  $ 4 "rx≔0"
+  global rx=0
+  $ 5 "ry≔0"
+  global ry=0
+  $ 6 "rz≔0"
+  global rz=0
+  $ 7 "P_ini≔get_actual_tcp_pose()"
+  global P_ini= get_actual_tcp_pose ()
+  $ 8 "desplazamiento≔p[0,y/1000,0,rx,ry,rz]"
+  global desplazamiento=p[0,y/1000,0,rx,ry,rz]
+  $ 9 "pos_coger≔pose_add(P_ini, desplazamiento)"
+  global pos_coger= pose_add (P_ini, desplazamiento)
+  $ 10 "z≔-100"
+  global z=-100
+  $ 11 "desplazamiento≔p[0,0,z/1000,0,0,0]"
+  global desplazamiento=p[0,0,z/1000,0,0,0]
+  $ 12 "PrimerPunto≔pose_add(pos_coger, desplazamiento)"
+  global PrimerPunto= pose_add (pos_coger, desplazamiento)
+  $ 13 "y≔-140"
+  global y=-140
+  $ 14 "desplazamiento≔p[0,y/1000,0,0,0,0]"
+  global desplazamiento=p[0,y/1000,0,0,0,0]
+  $ 15 "SegundoPunto≔pose_add(PrimerPunto, desplazamiento)"
+  global SegundoPunto= pose_add (PrimerPunto, desplazamiento)
+  $ 16 "x≔-130"
+  global x=-130
+  $ 17 "desplazamiento≔p[x/1000,0,0,0,0,0]"
+  global desplazamiento=p[x/1000,0,0,0,0,0]
+  $ 18 "TercerPunto≔pose_add(PrimerPunto, desplazamiento)"
+  global TercerPunto= pose_add (PrimerPunto, desplazamiento)
+  $ 19 "y≔-30"
+  global y=-30
+  $ 20 "desplazamiento≔p[0,y/1000,0,0,0,0]"
+  global desplazamiento=p[0,y/1000,0,0,0,0]
+  $ 21 "CuartoPunto≔pose_add(SegundoPunto, desplazamiento)"
+  global CuartoPunto= pose_add (SegundoPunto, desplazamiento)
+  $ 22 "x≔-50"
+  global x=-50
+  $ 23 "desplazamiento≔p[x/1000,0,0,0,0,0]"
+  global desplazamiento=p[x/1000,0,0,0,0,0]
+  $ 24 "QuintoPunto≔pose_add(TercerPunto, desplazamiento)"
+  global QuintoPunto= pose_add (TercerPunto, desplazamiento)
+  $ 25 "MoveJ"
+  $ 26 "Wait: 1.0"
+  sleep(1.0)
+  $ 27 "pos_coger" "breakAfter"
+  movej(pos_coger, a=1.3962634015954636, v=1.0471975511965976, r=0.05)
+  $ 28 "PrimerPunto" "breakAfter"
+  movej(PrimerPunto, a=1.3962634015954636, v=1.0471975511965976)
+  $ 29 "Loop 2 times"
+  Loop_1 = 0
+  while (Loop_1 < 2):
+    $ 30 "MoveL"
+    $ 31 "SegundoPunto" "breakAfter"
+    movel(SegundoPunto, a=1.2, v=0.25)
+    $ 32 "TercerPunto" "breakAfter"
+    movel(TercerPunto, a=1.2, v=0.25)
+    $ 33 "PrimerPunto" "breakAfter"
+    movel(PrimerPunto, a=1.2, v=0.25)
+    Loop_1 = Loop_1 + 1
+  end
+  $ 34 "Loop 2 times"
+  Loop_2 = 0
+  while (Loop_2 < 2):
+    $ 35 "CuartoPunto" "breakAfter"
+    movej(CuartoPunto, a=1.3962634015954636, v=1.0471975511965976)
+    $ 36 "QuintoPunto" "breakAfter"
+    movej(QuintoPunto, a=1.3962634015954636, v=1.0471975511965976)
+    $ 37 "PrimerPunto" "breakAfter"
+    movej(PrimerPunto, a=1.3962634015954636, v=1.0471975511965976)
+    Loop_2 = Loop_2 + 1
+  end
+end

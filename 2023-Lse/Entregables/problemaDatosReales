@@ -1,0 +1,218 @@
+(define (problem DLOG-2-2-3)
+	(:domain driverlog)
+	(:objects
+	Valencia - city
+	CalleArzobispoOlaechea - house
+	EstacionJoaquinSorolla - station
+	EstacionDelNorte - station
+	AeropuertoValencia - airport
+
+	Malaga - city
+	CalleCondeBelalcazar - house
+	AeropuertoCostaSol - airport
+	EstacionMariaZambrano - station
+
+	Madrid - city
+	CalleEdgarNeville - house
+	CalleDivinoValles - house
+	EstacionPuertaAtocha - station
+
+	plane1 - plane
+	plane2 - plane
+	train1 - train
+	train2 - train
+	truck1 - truck
+	truck2 - truck
+	truck3 - truck
+	truck4 - truck
+
+	driver1 - driver
+	driver2 - driver
+	driver3 - driver
+	parcel1 - parcel
+	parcel2 - parcel
+
+
+	)
+	
+	(:init
+	;Definir la localización de los lugares y su ciudad
+	(located AeropuertoValencia Valencia)
+	(located EstacionDelNorte Valencia)
+	(located EstacionJoaquinSorolla Valencia)
+	(located CalleArzobispoOlaechea Valencia)
+
+	(located AeropuertoCostaSol Malaga)
+	(located CalleCondeBelalcazar Malaga)
+	(located EstacionMariaZambrano Malaga)
+
+	(located EstacionPuertaAtocha Madrid)
+	(located CalleEdgarNeville Madrid)
+	(located CalleDivinoValles Madrid)
+
+
+	;Definir la localización de los conductores
+	(at driver1 EstacionDelNorte)
+	(at driver2 CalleCondeBelalcazar)
+	(at driver3 CalleEdgarNeville)
+	;;Definir la localización de los paquetes y su peso
+	(at parcel1 CalleCondeBelalcazar)
+	(at parcel2 CalleArzobispoOlaechea)
+	(= (parcel-weight parcel1) 1)
+	(= (parcel-weight parcel2) 1)
+
+	;Definir de los vehículos y sus pesos
+	(at truck1 EstacionJoaquinSorolla)
+	(at truck2 AeropuertoValencia)
+	(at truck3 AeropuertoCostaSol)
+	(at truck4 CalleEdgarNeville)
+
+	(= (capacity-weight truck1) 1)
+	(= (capacity-weight truck2) 1)
+	(= (capacity-weight truck3) 1)
+	(= (capacity-weight truck4) 1)
+	; (empty truck1)
+	; (empty truck2)
+	; (empty truck3)
+	; (empty truck4)
+
+	(at train1 EstacionDelNorte)
+	(at train2 EstacionPuertaAtocha)
+	(at plane2 AeropuertoCostaSol)
+	(at plane1 AeropuertoValencia)
+
+
+	;Valencia
+	(path CalleArzobispoOlaechea EstacionJoaquinSorolla)
+	(path CalleArzobispoOlaechea EstacionDelNorte)
+	(path CalleArzobispoOlaechea AeropuertoValencia)
+	(= (time-to-walk CalleArzobispoOlaechea EstacionJoaquinSorolla) 33)
+	(= (time-to-walk CalleArzobispoOlaechea EstacionDelNorte) 39)
+	(= (time-to-walk CalleArzobispoOlaechea AeropuertoValencia) 133)
+
+	(= (time-to-drive CalleArzobispoOlaechea EstacionJoaquinSorolla) 6)
+	(= (time-to-drive CalleArzobispoOlaechea EstacionDelNorte) 9)
+	(= (time-to-drive CalleArzobispoOlaechea AeropuertoValencia) 16)
+
+
+	(path EstacionJoaquinSorolla CalleArzobispoOlaechea)
+	(path EstacionJoaquinSorolla EstacionDelNorte)
+	(path EstacionJoaquinSorolla AeropuertoValencia)
+
+	(= (time-to-walk EstacionJoaquinSorolla CalleArzobispoOlaechea) 33)
+	(= (time-to-walk EstacionJoaquinSorolla EstacionDelNorte) 11)
+	(= (time-to-walk EstacionJoaquinSorolla AeropuertoValencia) 131)
+
+	(= (time-to-drive EstacionJoaquinSorolla CalleArzobispoOlaechea) 6)
+	(= (time-to-drive EstacionJoaquinSorolla EstacionDelNorte) 4)
+	(= (time-to-drive EstacionJoaquinSorolla AeropuertoValencia) 20)
+
+	(path EstacionDelNorte CalleArzobispoOlaechea)
+	(path EstacionDelNorte EstacionJoaquinSorolla)
+	(path EstacionDelNorte AeropuertoValencia)
+	(= (time-to-walk EstacionDelNorte CalleArzobispoOlaechea) 39)
+	(= (time-to-walk EstacionDelNorte EstacionJoaquinSorolla) 11)
+	(= (time-to-walk EstacionDelNorte AeropuertoValencia) 125)
+
+	(= (time-to-drive EstacionDelNorte CalleArzobispoOlaechea) 9)
+	(= (time-to-drive EstacionDelNorte EstacionJoaquinSorolla) 4)
+	(= (time-to-drive EstacionDelNorte AeropuertoValencia) 21)
+
+
+	(path AeropuertoValencia CalleArzobispoOlaechea)
+	(path AeropuertoValencia EstacionJoaquinSorolla)
+	(path AeropuertoValencia EstacionDelNorte)
+	(= (time-to-walk AeropuertoValencia CalleArzobispoOlaechea) 133)
+	(= (time-to-walk AeropuertoValencia EstacionJoaquinSorolla) 131)
+	(= (time-to-walk AeropuertoValencia EstacionDelNorte) 125)
+
+	(= (time-to-drive AeropuertoValencia CalleArzobispoOlaechea) 16)
+	(= (time-to-drive AeropuertoValencia EstacionJoaquinSorolla) 20)
+	(= (time-to-drive AeropuertoValencia EstacionDelNorte) 21)
+
+	;Malaga
+	(path CalleCondeBelalcazar AeropuertoCostaSol)
+	(path CalleCondeBelalcazar EstacionMariaZambrano)
+	(= (time-to-walk CalleCondeBelalcazar AeropuertoCostaSol) 125)
+	(= (time-to-walk CalleCondeBelalcazar EstacionMariaZambrano) 45)
+
+	(= (time-to-drive CalleCondeBelalcazar AeropuertoCostaSol) 17)
+	(= (time-to-drive CalleCondeBelalcazar EstacionMariaZambrano) 12)
+
+	(path AeropuertoCostaSol EstacionMariaZambrano)
+	(path AeropuertoCostaSol CalleCondeBelalcazar)
+	(= (time-to-walk AeropuertoCostaSol EstacionMariaZambrano) 150)
+	(= (time-to-walk AeropuertoCostaSol CalleCondeBelalcazar) 125)
+
+	(= (time-to-drive AeropuertoCostaSol EstacionMariaZambrano) 18)
+	(= (time-to-drive AeropuertoCostaSol CalleCondeBelalcazar) 17)
+
+	(path EstacionMariaZambrano AeropuertoCostaSol)
+	(path EstacionMariaZambrano CalleCondeBelalcazar)
+
+	(= (time-to-walk EstacionMariaZambrano AeropuertoCostaSol) 150)
+	(= (time-to-walk EstacionMariaZambrano CalleCondeBelalcazar) 45)
+	(= (time-to-drive EstacionMariaZambrano AeropuertoCostaSol) 18)
+	(= (time-to-drive EstacionMariaZambrano CalleCondeBelalcazar) 12)
+
+	;Madrid
+	(path CalleEdgarNeville EstacionPuertaAtocha)
+	(= (time-to-walk CalleEdgarNeville EstacionPuertaAtocha) 64)
+	(= (time-to-drive CalleEdgarNeville EstacionPuertaAtocha) 13)
+
+	(path CalleDivinoValles EstacionPuertaAtocha)
+	(= (time-to-walk CalleDivinoValles EstacionPuertaAtocha) 25)
+	(= (time-to-drive CalleDivinoValles EstacionPuertaAtocha) 5)
+	(path EstacionPuertaAtocha CalleEdgarNeville)
+	(path EstacionPuertaAtocha CalleDivinoValles)
+	(= (time-to-walk EstacionPuertaAtocha CalleEdgarNeville) 64)
+	(= (time-to-walk EstacionPuertaAtocha CalleDivinoValles) 25)
+	(= (time-to-drive EstacionPuertaAtocha CalleEdgarNeville) 13)
+	(= (time-to-drive EstacionPuertaAtocha CalleDivinoValles) 5)
+	
+
+	;Conection between Airports
+	(path AeropuertoValencia AeropuertoCostaSol)
+	(= (time-to-fly AeropuertoValencia AeropuertoCostaSol) 93)
+	(path AeropuertoCostaSol AeropuertoValencia)
+	(= (time-to-fly AeropuertoCostaSol AeropuertoValencia) 93)
+
+	;Connection between Train stations
+	(path EstacionJoaquinSorolla EstacionDelNorte)
+	(path EstacionJoaquinSorolla EstacionMariaZambrano)
+	(path EstacionJoaquinSorolla EstacionPuertaAtocha)
+	(= (time-to-train EstacionJoaquinSorolla EstacionDelNorte) 20)
+	(= (time-to-train EstacionJoaquinSorolla EstacionMariaZambrano) 221)
+	(= (time-to-train EstacionJoaquinSorolla EstacionPuertaAtocha) 136)
+	(path EstacionDelNorte EstacionJoaquinSorolla)
+	(path EstacionDelNorte EstacionMariaZambrano)
+	(path EstacionDelNorte EstacionPuertaAtocha)
+	(= (time-to-train EstacionDelNorte EstacionJoaquinSorolla) 20)
+	(= (time-to-train EstacionDelNorte EstacionMariaZambrano) 164)
+	(= (time-to-train EstacionDelNorte EstacionPuertaAtocha) 133)
+	(path EstacionMariaZambrano EstacionJoaquinSorolla)
+	(path EstacionMariaZambrano EstacionDelNorte)
+	(path EstacionMariaZambrano EstacionPuertaAtocha)
+	(= (time-to-train EstacionMariaZambrano EstacionJoaquinSorolla) 221)
+	(= (time-to-train EstacionMariaZambrano EstacionDelNorte) 164)
+	(= (time-to-train EstacionMariaZambrano EstacionPuertaAtocha) 135)
+	(path EstacionPuertaAtocha EstacionJoaquinSorolla)
+	(path EstacionPuertaAtocha EstacionDelNorte)
+	(path EstacionPuertaAtocha EstacionMariaZambrano)
+	(= (time-to-train EstacionPuertaAtocha EstacionJoaquinSorolla) 136)
+	(= (time-to-train EstacionPuertaAtocha EstacionDelNorte) 133)
+	(= (time-to-train EstacionPuertaAtocha EstacionMariaZambrano) 135)
+
+
+
+)
+	(:goal (and
+	(at parcel1 CalleDivinoValles)
+	(at parcel2 CalleDivinoValles)
+
+
+	))
+
+(:metric minimize (total-time))
+
+)
